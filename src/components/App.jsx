@@ -5,11 +5,13 @@ class App extends React.Component {
     this.state = {
       videos: [],
       videoPlaying: {},
-      searchText: ''
+      searchText: '',
+      autoplay: 0
     };
     this.onVideoTitleClick = this.onVideoTitleClick.bind(this);
     this.onSearchButton = this.onSearchButton.bind(this);
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
+    this.handleCheckChange = this.handleCheckChange.bind(this);
   }
 
   render() {
@@ -27,9 +29,14 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <div><h5><VideoPlayer object={this.state.videoPlaying}/></h5></div>
+            <div><h5><VideoPlayer object={this.state.videoPlaying} autoplay = {this.state.autoplay}/></h5></div>
           </div>
           <div className="col-md-5">
+          <p className= "check"> <input
+            type="checkbox"
+            checked={this.state.checked}
+            onChange={this.handleCheckChange}
+          > Autoplay </input> </p>
             <div><h5><VideoList array={this.state.videos} onVideoTitleClick={this.onVideoTitleClick}/></h5></div>
           </div>
         </div>
@@ -53,6 +60,12 @@ class App extends React.Component {
     });
     this.debouncedSearch(value)
 
+  }
+
+  handleCheckChange() {
+    this.setState({
+      autoplay: !!this.state.autoplay ?  0 : 1
+    });
   }
 
   onSearchButton() {

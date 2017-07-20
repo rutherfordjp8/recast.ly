@@ -1,9 +1,18 @@
-var VideoList = (props) => (
-  <div className="video-list">
-    {props.array.map(video =>
-        <VideoListEntry object={video} onVideoTitleClick={props.onVideoTitleClick}/>
-    )}
-  </div>
+class VideoList extends React.Component {
+  constructor(props){
+    super(props)
+  }
+
+  render() {
+    return (
+      <div className="video-list">
+        {props.array.map(video =>
+            <VideoListEntry object={video} onVideoTitleClick={props.onVideoTitleClick}/>
+        )}
+      </div>
+    )
+  }
+
 );
 
 

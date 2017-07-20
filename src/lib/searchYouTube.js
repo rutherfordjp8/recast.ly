@@ -8,7 +8,8 @@ var searchYouTube = (options, callback) => {
             'part': 'snippet',
             'type': 'video',
             'videoEmbeddable': 'true',
-            'key': window.YOUTUBE_API_KEY
+            'key': window.YOUTUBE_API_KEY,
+            'chart': 'mostPopular'
           },
           success: (data) => {
             callback(data.items, data.items[0]);

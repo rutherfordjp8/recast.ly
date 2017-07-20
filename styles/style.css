@@ -76,6 +76,11 @@ body {
   color: #999;
 }
 
+.check {
+  padding-left: 10px;
+  padding-bottom: -50px;
+}
+
 .loading {
   padding-left: 20px;
 }
