@@ -3,8 +3,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      videos: window.exampleVideoData,
-      videoPlaying: window.exampleVideoData[0],
+      videos: [],
+      videoPlaying: {},
       searchText: ''
     };
     this.onVideoTitleClick = this.onVideoTitleClick.bind(this);
@@ -13,6 +13,11 @@ class App extends React.Component {
   }
 
   render() {
+    if (!this.state.videos.length) {
+      return (
+        <div> Loading </div>
+      )
+    }
     return (
       <div>
         <nav className="navbar">
@@ -32,6 +37,10 @@ class App extends React.Component {
     );
   }
 
+  componentDidMount() {
+    this.search('');
+  }
+
   onVideoTitleClick(selectedVideo) {
     this.setState({
       videoPlaying: selectedVideo
@@ -42,6 +51,8 @@ class App extends React.Component {
     this.setState({
       searchText: value
     });
+    this.debouncedSearch(value)
+
   }
 
   onSearchButton() {
@@ -55,7 +66,14 @@ class App extends React.Component {
       });
     })
   }
+
+  debouncedSearch(q) {
+    _.debounce(this.search, 500).call(this, q);
+  }
+
 };
+
+
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
