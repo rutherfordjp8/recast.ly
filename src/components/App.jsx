@@ -1,12 +1,15 @@
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       videos: window.exampleVideoData,
-      videoPlaying: window.exampleVideoData[0]
+      videoPlaying: window.exampleVideoData[0],
+      searchText: ''
     };
     this.onVideoTitleClick = this.onVideoTitleClick.bind(this);
+    this.onSearchButton = this.onSearchButton.bind(this);
+    this.onSearchTextChange = this.onSearchTextChange.bind(this);
   }
 
   render() {
@@ -14,7 +17,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5> <Search/></h5></div>
+            <div><h5> <Search textchange={this.onSearchTextChange} buttoncallback={this.onSearchButton} searchedWords = {this.state.searchText}/></h5></div>
           </div>
         </nav>
         <div className="row">
@@ -35,28 +38,22 @@ class App extends React.Component {
     });
   }
 
-  search(q) {
-    $.ajax({
-            url: 'https://www.googleapis.com/youtube/v3/search',
-            method: 'GET',
-            data: {
-              'q': q,
-              'maxResults': '5',
-              'part': 'snippet',
-              'type': 'video',
-              'videoEmbeddable': 'true',
-              'key': window.YOUTUBE_API_KEY
-            },
-            success: (data) => {
-              this.setState({
-                videos: data.items,
-                videoPlaying: data.items[0]
-              });
-            },
-            error: function() {
-            }
-          });
+  onSearchTextChange(value) {
+    this.setState({
+      searchText: value
+    });
+  }
 
+  onSearchButton() {
+    this.search(this.state.searchText);
+  }
+
+  search(q) {
+    this.props.fetcher(q, (videosvalue, videoPlayingvalue) => {this.setState({
+        videos: videosvalue,
+        videoPlaying: videoPlayingvalue
+      });
+    })
   }
 };
 

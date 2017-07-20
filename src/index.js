@@ -1,1 +1,1 @@
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App fetcher={window.searchYouTube}/>, document.getElementById('app'));
