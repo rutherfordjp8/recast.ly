@@ -12,6 +12,7 @@ class App extends React.Component {
     this.onSearchButton = this.onSearchButton.bind(this);
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
     this.handleCheckChange = this.handleCheckChange.bind(this);
+    this.searchById = this.searchById.bind(this);
   }
 
   render() {
@@ -30,6 +31,7 @@ class App extends React.Component {
         <div className="row">
           <div className="col-md-7">
             <div><h5><VideoPlayer object={this.state.videoPlaying} autoplay = {this.state.autoplay}/></h5></div>
+            
           </div>
           <div className="col-md-5">
           <p className= "check"> <input
@@ -52,6 +54,7 @@ class App extends React.Component {
     this.setState({
       videoPlaying: selectedVideo
     });
+    this.searchById(selectedVideo.id.videoId);
   }
 
   onSearchTextChange(value) {
@@ -84,6 +87,12 @@ class App extends React.Component {
     _.debounce(this.search, 500).call(this, q);
   }
 
+  searchById(id) {
+    this.props.idFetcher(id, (videovalue) => {this.setState({
+      videos: videovalue
+      });
+    })
+  }
 };
 
 
