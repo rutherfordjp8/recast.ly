@@ -47,12 +47,64 @@ body {
   border: 0;
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
   margin-top: 10px;
+  overflow: scroll;
+  height: 100px;
+  width: 100%;
+  font-size: 14px;
+}
+.chatterbox {
+  background: #fff;
+  padding: 20px;
+  border: 0;
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+  margin-top: 10px;
+  margin-left: 30px;
+  margin-right: 50px;
+  margin-bottom: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 209px;
-  width: 100%;
+  width: 95.5%;
+  height: 100%;
 }
 
+.comment-bar {
+  border-radius: 1px;
+  background: #fff;
+
+}
+
+.comment-bar .name-form-control {
+  width: 90px;
+  font-size: 15px;
+  margin: 5px 5px 5px 5px;
+}
+
+.comment-bar .comment-form-control {
+  width: 500px;
+  height: 80px;
+  margin: 5px 5px 5px 5px;
+  vertical-align: top;
+  font-size: 15px;
+}
+
+.comment-bar .btn {
+  border-radius: 2px;
+  border-color: #d3d3d3;
+  background: #f8f8f8;
+  width: 20%;
+  margin-left: -1px;
+}
+
+.comment-bar .btn:hover {
+  border-color: #c6c6c6;
+  background: #f0f0f0;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.10);
+}
+
+.blankLine {
+  height: 10px;
+  width: 100%;
+}
 .video-list {
   background: #fff;
   padding: 8px;
@@ -82,6 +134,37 @@ body {
   text-overflow: ellipsis;
   height: 40px;
   width: 100%;
+}
+
+.comment-entry-name {
+  font-weight: bold;
+  font-size: 12px;
+  color: #999;
+}
+
+.comment-entry-name:hover {
+  color: #e62117;
+  cursor: pointer;
+}
+
+.comment-entry-detail {
+  font-size: 14px;
+  text-align: left;
+  color: black;
+  height: 40px;
+  width: 100%;
+}
+
+.comment-list {
+  background: #fff;
+  padding: 1px;
+  border: 0;
+  margin-right: 20px;
+
+}
+
+.comment-list-entry {
+  font-size: 16px;
 }
 
 .check {

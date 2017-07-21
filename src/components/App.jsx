@@ -6,13 +6,18 @@ class App extends React.Component {
       videos: [],
       videoPlaying: {},
       searchText: '',
-      autoplay: 0
+      autoplay: 0,
+      comments: [],
+      name: ''
     };
     this.onVideoTitleClick = this.onVideoTitleClick.bind(this);
     this.onSearchButton = this.onSearchButton.bind(this);
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
     this.handleCheckChange = this.handleCheckChange.bind(this);
     this.searchById = this.searchById.bind(this);
+    this.fetchedMessages = this.fetchedMessages.bind(this);
+    this.sendMessages = this.sendMessages.bind(this);
+    this.onNameChange = this.onNameChange.bind(this);
   }
 
   render() {
@@ -31,7 +36,9 @@ class App extends React.Component {
         <div className="row">
           <div className="col-md-7">
             <div><h5><VideoPlayer object={this.state.videoPlaying} autoplay = {this.state.autoplay}/></h5></div>
-            
+            <div className="chatterbox">
+            <div><h5><CommentList array={this.state.comments} fetcher={this.fetchedMessages} sender={this.sendMessages} nameChanger={this.onNameChange}/></h5></div>
+            </div>
           </div>
           <div className="col-md-5">
           <p className= "check"> <input
@@ -48,6 +55,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.search('');
+    this.fetchedMessages();
   }
 
   onVideoTitleClick(selectedVideo) {
@@ -93,6 +101,25 @@ class App extends React.Component {
       });
     })
   }
+
+  fetchedMessages() {
+    this.props.fetchFunction((fetchedMessages) => { this.setState({
+        comments: fetchedMessages
+      });
+    })
+  }
+
+  sendMessages(message) {
+    this.props.sendFunction((message));
+  }
+
+  onNameChange(namevalue) {
+    this.setState({
+      name: namevalue
+    }
+    )
+  }
+
 };
 
 
