@@ -5,19 +5,22 @@ class CommentEntry extends React.Component {
   }
 
   render() {
-    return(
-      <div><h5>
-        <div className="video-list-entry media">
-          <div className="media-left media-middle">
-            <img className="media-object" src="src/data/icon.png" alt="" height="30"/>
-            <div className="comment-entry-name">{_.escape(this.props.object.username)}</div>
+    if (this.props.object.username !== undefined && this.props.object.text !== undefined) {
+      return(
+        <div><h5>
+          <div className="video-list-entry media">
+            <div className="media-left media-middle">
+              <img className="media-object" src="src/data/icon.png" alt="" height="30"/>
+              <div className="comment-entry-name">{_.escape(this.props.object.username)}</div>
+            </div>
+            <div className="media-body">
+              <div className="comment-entry-detail">{_.escape(this.props.object.text)}</div>
+            </div>
           </div>
-          <div className="media-body">
-            <div className="comment-entry-detail">{_.escape(this.props.object.text)}</div>
-          </div>
-        </div>
-      </h5></div>
-    );
+        </h5></div>
+      );
+    }
+    return <div></div>
   }
 };
 
